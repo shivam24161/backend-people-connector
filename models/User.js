@@ -11,14 +11,17 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Email is required'],
         unique: true,
-        lowercase: true,
-        match: [/\S+@\S+\.\S+/, 'Invalid email']
+        // lowercase: true,
+        // match: [/\S+@\S+\.\S+/, 'Invalid email']
     },
     password: {
         type: String,
         required: [true, 'Password is required'],
         minlength: 6,
     },
+    friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    blockedUsers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    friendRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     createdAt: {
         type: Date,
         default: Date.now,
